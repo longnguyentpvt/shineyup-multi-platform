@@ -1,0 +1,15 @@
+{
+  "eslint.workingDirectories" : [
+    { "pattern": "./apps/**/*" },
+    { "pattern": "./packages/*" },
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.validate": ["javascript", "typescript"],
+  "editor.rulers": [
+    140
+  ],
+  "eslint.nodePath": "./node_modules",
+  "typescript.tsdk": "node_modules/typescript/lib"
+}

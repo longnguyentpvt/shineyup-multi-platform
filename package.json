@@ -1,0 +1,14 @@
+{
+  "name": "@shineyup/monorepo",
+  "version": "1.0.0",
+  "description": "Shineyup - Multi Functional Platform",
+  "main": "index.js",
+  "author": "Long Nguyen",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/servers/*",
+    "apps/clients/*"
+  ]
+}
