@@ -3,9 +3,9 @@ module.exports = {
   parserOptions : {
     project : "./tsconfig.json"
   },
-  rules: [
+  rules: {
     "import/no-unresolved": "off"
-  ],
+  },
   settings : {
     "import/resolver" : {
       typescript : {
