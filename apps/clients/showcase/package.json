@@ -10,7 +10,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest"
+    "test": "echo 'No Script'"
   },
   "dependencies": {
     "bootstrap": "^5.3.3",

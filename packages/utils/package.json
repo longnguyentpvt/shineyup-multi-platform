@@ -5,6 +5,8 @@
   "author": "Long Nguyen",
   "license": "MIT",
   "scripts": {
-    "build" : "echo 'No build script'"
+    "build" : "echo 'No script'",
+    "lint" : "echo 'No script'",
+    "test" : "echo 'No script'"
   }
 }
