@@ -32,6 +32,9 @@ jobs:
         app: ${{fromJson(needs.define-apps.outputs.apps)}}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -67,6 +70,13 @@ jobs:
           chmod +x ./deployments/${{ env.APP_NAME }}-docker-build.sh
           ./deployments/${{ env.APP_NAME }}-docker-build.sh "${{ env.VERSION }}"
           ./deployments/${{ env.APP_NAME }}-docker-build.sh "latest"
+
+      - name: Release tag
+        run: |
+          git config --global user.email ""
+          git config --global user.name "GitHub_Actions"
+          git tag -a "${{ matrix.app }}" -m "${{ env.APP_NAME }} version ${{ env.VERSION }}"
+          git push origin "${{ matrix.app }}"
 
   deploy:
     needs: [define-apps, build]
