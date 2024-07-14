@@ -18,6 +18,9 @@ jobs:
       - name: "Install Dependencies"
         run: |
           yarn
+          
+      - name: "Build Check"
+        run: yarn workspaces run build
 
       - name: "Unit test + Functional test"
         run: yarn workspaces run test
