@@ -9,14 +9,24 @@ on:
         type: string
 
 jobs:
+  define-apps:
+    runs-on: ubuntu-22.04
+    outputs:
+      apps: ${{ steps.split_inputs.outputs.apps }}
+    steps:
+      - name: Extract tags  from inputs
+        id: split_inputs
+        run: |
+          IFS=',' read -ra APP_ARRAY <<< "${{ github.event.inputs.apps }}"
+          APPS_JSON=$(printf '["%s"]' "${APP_ARRAY[@]}")
+          echo "::set-output name=apps::$APPS_JSON"
+
   build:
+    needs: define-apps
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        app: ${{fromJson('["' + github.event.inputs.variables.replace(/,/g, '","')  + '"]')}}
-    defaults:
-      run:
-        working-directory: ./${{ matrix.app }}
+        app: ${{fromJson(needs.define-apps.outputs.apps)}}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
