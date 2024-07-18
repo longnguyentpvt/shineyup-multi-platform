@@ -1,0 +1,15 @@
+{
+  "extends": "../../../packages/dev-configs/react.tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "paths": {
+      "@app/*": [
+        "./src/*"
+      ]
+    },
+  },
+  "include": ["src", "vite.config.ts", "__tests__"],
+  "exclude": [
+    "node_modules"
+  ]
+}
