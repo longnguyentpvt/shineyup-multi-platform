@@ -6,7 +6,8 @@
   "author": "Huy Dang",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build:local": "next build",
+    "build": "BASE_PATH='/demo/tailwind-config-builder' next build",
     "start": "next start",
     "lint": "next lint",
     "test": "jest"

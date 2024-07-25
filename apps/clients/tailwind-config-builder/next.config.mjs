@@ -10,7 +10,8 @@ const nextConfig = {
       }
     ]
   },
-  output: "standalone"
+  output: "standalone",
+  basePath: process.env.BASE_PATH || ""
 };
 
 export default nextConfig;
