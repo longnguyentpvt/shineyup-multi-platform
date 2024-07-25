@@ -12,7 +12,7 @@
     "noEmitOnError": true,
     "paths": {
       "@app/*": [
-        "./*"
+        "./src/*"
       ]
     },
     "plugins": [
