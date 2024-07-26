@@ -1,7 +1,11 @@
+import ConfigSection from "@app/components/config-section";
+
 export default function Home(): JSX.Element {
   return (
-    <div className="bg-background flex items-center justify-center shadow-md rounded-lg p-6 mb-8">
-      <h4 className="text-lg text-secondary">Coming soon...</h4>
-    </div>
+    <section className="h-full bg-background">
+      <div className="container mx-auto h-full py-8 px-4 w-full">
+        <ConfigSection />
+      </div>
+    </section>
   );
 }
