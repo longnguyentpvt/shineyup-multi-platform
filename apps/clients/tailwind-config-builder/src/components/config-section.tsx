@@ -6,18 +6,24 @@ import { useState } from "react";
 
 import ColorInput from "./color-input";
 import ConfigOutput from "./config-output";
+import ConfigShowcase from "./config-showcase";
+
+const DEFAULT_COLORS: Record<ColorRole, string> = {
+  primary: "#2b2d3e",
+  secondary: "#939185",
+  background: "#f1f1f1",
+  accent: "#d4a593"
+};
 
 export default function ConfigSection(): JSX.Element {
-  const [colors, setColors] = useState<Record<string, string>>({
-    primary: "",
-    secondary: "",
-    accent: "",
-    background: "",
-    text: ""
-  });
+  const [prevColors, setPrevColors] = useState<Record<ColorRole, string>>(DEFAULT_COLORS);
+  const [colors, setColors] = useState<Record<ColorRole, string>>(DEFAULT_COLORS);
 
   const handleColorChange = (role: ColorRole, value: string): void => {
-    setColors((prevColors) => ({ ...prevColors, [role]: value }));
+    setColors((prevState) => {
+      setPrevColors(prevState);
+      return { ...prevState, [role]: value };
+    });
   };
 
   const generatedConfig = generateConfig(colors);
@@ -36,7 +42,12 @@ export default function ConfigSection(): JSX.Element {
           )) }
         </div>
       </div>
-      <ConfigOutput config={ generatedConfig } />
+      <div>
+        <ConfigShowcase prevColors={ prevColors } colors={ colors } />
+      </div>
+      <div>
+        <ConfigOutput config={ generatedConfig } />
+      </div>
     </div>
   );
 }

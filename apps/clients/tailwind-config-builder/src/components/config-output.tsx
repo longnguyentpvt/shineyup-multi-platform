@@ -9,7 +9,7 @@ interface ConfigOutputProps {
 }
 
 export default function ConfigOutput({ config }: ConfigOutputProps): JSX.Element {
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = useState<boolean>(false);
 
   const handleCopy = (): void => {
     navigator.clipboard.writeText(config);
