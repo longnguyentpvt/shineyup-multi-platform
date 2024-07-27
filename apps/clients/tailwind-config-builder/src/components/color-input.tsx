@@ -3,6 +3,8 @@
 import { ColorRole } from "@app/lib/type";
 import { ChangeEvent } from "react";
 
+import { Input } from "./ui/input";
+
 interface ColorInputProps {
   role: ColorRole;
   value: string;
@@ -26,13 +28,11 @@ export default function ColorInput({ role, value, onChange }: ColorInputProps): 
           name={ role }
           value={ value }
           onChange={ handleChange }
-          className="h-8 w-8 rounded-md border-primary mr-2" />
-        <input
+          className="h-8 w-8 mr-2" />
+        <Input
           type="text"
           value={ value }
           onChange={ handleChange }
-          className="flex-1 min-w-0 block w-full px-3 py-2 rounded-md border border-gray-300
-          shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           placeholder="#000000" />
       </div>
     </div>
