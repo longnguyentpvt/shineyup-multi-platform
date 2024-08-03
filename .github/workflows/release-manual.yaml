@@ -30,6 +30,7 @@ jobs:
     strategy:
       matrix:
         app: ${{fromJson(needs.define-apps.outputs.apps)}}
+      max-parallel: 1
     steps:
       - uses: actions/checkout@v4
         with:
@@ -54,11 +55,13 @@ jobs:
       - name: 'Get tag version'
         run: |
           TAGNAME="${{ matrix.app }}"
-          VER=${TAGNAME##*/}
-          echo "Version $VER"
-          echo "VERSION=$VER" >> $GITHUB_ENV
           APP_NAME=$(echo "$TAGNAME" | cut -d'/' -f2)
           echo "APP_NAME=$APP_NAME" >> $GITHUB_ENV
+          VER=${TAGNAME##*/}
+          echo "Appname $APP_NAME"
+          echo "Version $VER"
+          APP_VER=$(yarn workspace @shineyup/$APP_NAME version --$VER --no-git-tag-version | grep 'info New version:' | awk '{print $4}')
+          echo "VERSION=$APP_VER" >> $GITHUB_ENV
 
       - name: 'Install dependencies'
         run: |
@@ -75,8 +78,13 @@ jobs:
         run: |
           git config --global user.email ""
           git config --global user.name "GitHub_Actions"
-          git tag -a "${{ matrix.app }}" -m "${{ env.APP_NAME }} version ${{ env.VERSION }}"
-          git push origin "${{ matrix.app }}"
+          git fetch
+          git pull --no-rebase
+          git add -A
+          git commit -m "${{ env.APP_NAME }} version ${{ env.VERSION }}"
+          git push
+          git tag -a "app/${{env.APP_NAME}}/${{ env.VERSION }}" -m "${{ env.APP_NAME }} version ${{ env.VERSION }}"
+          git push --tags
 
   deploy:
     needs: [define-apps, build]
