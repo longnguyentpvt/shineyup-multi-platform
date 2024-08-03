@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@app/components/custom-image";
 
 function Header(): JSX.Element {
   return (
@@ -6,7 +6,7 @@ function Header(): JSX.Element {
       <div className="container flex justify-between items-center">
         <h1 className="text-accent text-4xl font-extrabold">Tailwind Config Builder</h1>
         <div className="relative w-[140px] h-[55px]">
-          <Image src="/assets/main-logo-with-text-shineyup.png" alt="" fill />
+          <Image src="/assets/main-logo-with-text-shineyup.png" alt="" width={ 828 } height={ 288 } />
         </div>
       </div>
     </header>
