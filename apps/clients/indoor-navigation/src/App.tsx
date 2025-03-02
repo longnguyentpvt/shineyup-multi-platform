@@ -25,30 +25,36 @@ function App(): ReactElement {
   };
 
   useEffect(() => {
-    const onPositionChange = (position: GeolocationPosition): void => {
-      const {
-        latitude: newLat,
-        longitude: newLng
-      } = position.coords;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+    jarvisIndoor.startLocating((latitude, longitude) => {
+      console.log(`Current position: Latitude ${ latitude }, Longitude ${ longitude }`);
+    });
+    // const onPositionChange = (position: GeolocationPosition): void => {
+    //   const {
+    //     latitude: newLat,
+    //     longitude: newLng
+    //   } = position.coords;
 
-      setCurrentMarker({ lat: newLat, lng: newLng });
-    };
+    //   setCurrentMarker({ lat: newLat, lng: newLng });
+    // };
 
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        onPositionChange,
-        (error) => {
-          console.error("Error obtaining location: ", error);
-        },
-        {
-          enableHighAccuracy: true, // Use GPS if available
-          timeout: 10000, // Maximum time to wait for a position
-          maximumAge: 0 // Don't use a cached position
-        }
-      );
-    } else {
-      console.error("Geolocation is not supported by this browser.");
-    }
+    // if ("geolocation" in navigator) {
+    //   navigator.geolocation.getCurrentPosition(
+    //     onPositionChange,
+    //     (error) => {
+    //       console.error("Error obtaining location: ", error);
+    //     },
+    //     {
+    //       enableHighAccuracy: true, // Use GPS if available
+    //       timeout: 10000, // Maximum time to wait for a position
+    //       maximumAge: 0 // Don't use a cached position
+    //     }
+    //   );
+    // } else {
+    //   console.error("Geolocation is not supported by this browser.");
+    // }
   }, [timer]);
 
   useEffect(() => {

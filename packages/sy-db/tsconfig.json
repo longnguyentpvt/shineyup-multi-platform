@@ -1,0 +1,23 @@
+{
+  "extends": "../dev-configs/base.tsconfig.json",
+  "ts-node" : {
+    "require" : [
+      "tsconfig-paths/register"
+    ]
+  },
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "./dist",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "paths": {
+      "@app/*": [
+        "./src/*"
+      ]
+    }
+  },
+  "include" : [
+    "./src/"
+  ],
+  "exclude": ["node_modules", "dist"]
+}
